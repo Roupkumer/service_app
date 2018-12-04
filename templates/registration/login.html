@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block nav %}{% endblock %}
+{% block content %}
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% if user.is_authenticated %}
+                    <br><br>
+                    <h1>You are Logged In.</h1><br>
+                    <h2><a href="{% url 'home' %}">Home</a></h2><br>
+                    <h2><a href="{% url 'logout' %}">Logout</a> </h2>
+                {% else %}
+                    <br><br>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><b>{{ field.label_tag }}</b></label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <button class="btn btn-outline-success" type="submit" style="margin-left: 10%;">Login
+                    </button>
+                    </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>No Account?</h2><br><br>
+                        <h2>SignUp As a <a href="{% url 'accounts:c_s' %}">Client</a> Or <a
+                                href="{% url 'accounts:s_s' %}">Server</a>
+                        </h2>
+                    </div>
+                {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

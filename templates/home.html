@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home
+{% endblock %}
+{% block content %}<br><br><br>
+    {% if user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-8">
+                <h1><u>All Categories</u></h1><br>
+                <ol>
+                    {% for c in category %}
+                        <h3><li><a href="{% url 'accounts:c_detail' c.id %}">{{ c.category_name }}</a></li></h3>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

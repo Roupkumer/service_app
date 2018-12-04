@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    All Server
+{% endblock %}
+{% block content %}<br><br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% if user.is_authenticated %}
+                    <table class="table table-borderless" border="0" style="text-align:center;">
+                        <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for s in server %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'accounts:server_profile' s.id %}">
+                                    {% if s.image %}
+                                        <img class="rounded" src="{{ s.image.url }}" width="70px" height="70px">
+                                    {% else %}
+                                        <img class="rounded" src="{% static 'service_app/img/blank_profile.png' %}" width="70px"
+                                             height="70px">
+                                    {% endif %}
+                                    </a>
+                                </td>
+                                <td><a href="{% url 'accounts:server_profile' s.id %}"><b>{{ s.name }}</b></a></td>
+                                <td><a href="{% url 'accounts:c_detail' s.category.id %}"><b>{{ s.category }}</b></a> </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

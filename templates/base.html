@@ -1,0 +1,91 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>{% block title %}Service App{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'service_app/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'service_app/css/mystyle.css' %}" rel="stylesheet">
+
+</head>
+<body>
+{% block nav %}
+    {% if user.is_authenticated %}
+
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'home' %}"><b>Server App</b></a>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li>
+                        <a class="nav-link" href="{% url 'home' %}" style="color:#000;"><b>Categories</b></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'accounts:all_server' %}" style="color:#000;"><b>All
+                            Servers</b></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="http://127.0.0.1:8000/admin/" style="color:#000;"><b>Admin</b></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+
+                        {% if user.is_client %}
+                            <li><a href="{% url 'accounts:client_profile' user.id %}">
+                                {% if user.image %}
+                                    <img class="rounded-circle" src="{{ user.image.url }}" width="35" height="35"
+                                         alt="img">
+                                {% else %}
+                                    <img class="rounded-circle"
+                                         src="{% static 'service_app/img/blank_profile.png' %}" width="35"
+                                         height="35">
+                                {% endif %}
+                                <b>Profile&nbsp;</b></a></li>
+                        {% elif user.is_server %}
+                            <li><a href="{% url 'accounts:server_profile' user.id %}">
+                                {% if user.image %}
+                                    <img class="rounded-circle" src="{{ user.image.url }}" width="35" height="35"
+                                         alt="img">
+                                {% else %}
+                                    <img class="rounded-circle"
+                                         src="{% static 'service_app/img/blank_profile.png' %}" width="35"
+                                         height="35">
+                                {% endif %}<b>Profile&nbsp;</b></a></li>
+                        {% endif %}
+                        <li><a href="{% url 'logout' %}"><b>&nbsp;Logout</b></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    {% else %}
+        <center><br><br>
+        <h2><a href="http://127.0.0.1:8000">Login</a></h2>Or
+        <h2>SignUp As a <a href="{% url 'accounts:c_s' %}">Client</a> Or <a
+                href="{% url 'accounts:s_s' %}">Server</a>
+        </h2></center>
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="{% static 'service_app/js/jquery-3.3.1.min.js' %}"><\/script>')</script>
+<script src="{% static 'service_app/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+    Category
+{% endblock %}
+{% block content %}<br><br><br>
+    {% if user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                <h2><u>{{ c.category_name }}</u></h2><br>
+                <ol>
+                {% for s in c.server_set.all %}
+                   <h3><li><a href="{% url 'accounts:server_profile' s.id %}">{{ s.name }}</a></li></h3>
+                {% endfor %}
+                </ol>
+                {% if c.server_set.count is 0 %}
+                    <h1>No Server in this category</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

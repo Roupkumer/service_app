@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Profile
+{% endblock %}
+{% block content %}<br><br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                {% if user.is_authenticated %}
+                    {% if c.image %}
+                        <img src="{{ c.image.url }}" width="300px" height="300px"><br>
+                    {% else %}
+                        <img src="{% static 'service_app/img/blank_profile.png' %}" width="300px" height="300px"><br>
+                    {% endif %}
+                    {% if user.is_client %}
+                        {% if user.id == c.id %}
+                            <br>
+                            <a href="{% url 'accounts:client_update' c.id %}"><h2>Update Your Profile</h2></a><br>
+                            {% if servers %}
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#allRequested">
+                                    See all requested server
+                                </button>
+                            {% else %}
+                                <h3>No Request sent</h3>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                {% if user.is_authenticated %}
+                    <h3>Name: {{ c.name }}</h3><br>
+                    <h3>Address: {{ c.address }}</h3><br>
+                    {% if c.gender == 'M' %}
+                        <h3>Gender: Male</h3><br>
+                    {% else %}
+                        <h3>Gender: Female</h3><br>
+                    {% endif %}
+                    <h3>Phone: {{ c.phone }}</h3><br>
+                    <h3>Birth Date: {{ c.birth_date }}</h3><br>
+                    <h3>Joined Date: {{ c.joined_date }}</h3><br>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- All requested Client Modal -->
+    <div class="modal fade" id="allRequested">
+        <div class="modal-dialog modal-dialog-centered  modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Category</th>
+                            <th>Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {% for s in servers %}
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                    {% if s.image %}
+                                        <img class="rounded" src="{{ s.image.url }}" width="70px"
+                                             height="70px">
+                                    {% else %}
+                                        <img class="rounded"
+                                             src="{% static 'service_app/img/blank_profile.png' %}"
+                                             width="70px"
+                                             height="70px">
+                                    {% endif %}
+                                </td>
+                                <td>{{ s.name }}</td>
+                                <td>{{ s.phone }}</td>
+                                <td>{{ s.category }}</td>
+                                <td><a href="{% url 'accounts:server_profile' s.id %}">View Details</a>
+                                </td></tr>
+                            {% endfor %}
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
