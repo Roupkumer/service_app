@@ -8,8 +8,8 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
 
-def _login(request):
-    return redirect('http://127.0.0.1:8000/accounts/login/')
+# def _login(request):
+#     return redirect('http://127.0.0.1:8000/accounts/login/')
 
 
 def home(request):
@@ -21,7 +21,7 @@ def home(request):
             user = Server.objects.get(name=request.user.name)
             return render(request, 'home.html', {'server': user})
     else:
-        return render(request, 'home.html', {})
+        return redirect('http://127.0.0.1:8000/accounts/login/')
 
 
 def client_signup(request):
@@ -59,21 +59,24 @@ def server_signup(request):
             phone = form.cleaned_data['phone']
             password = form.cleaned_data['password1']
 
+            print(phone)
+
             # authenticate user then login
             user = authenticate(phone=phone, password=password)
             login(request, user)
 
             return redirect('home')
+        else:
+            return render(request,'signup.html', {'form': form})
     else:
         form = ServerSignUpForm()
         return render(request, 'signup.html', {'form': form})
 
 
-class AllCategory(ListView):
-    model = Category
-    template_name = 'home.html'
-    context_object_name = 'category'
+def all_category(request):
 
+
+    return render(request, 'home.html',context)
 
 class CategoryDetail(DetailView):
     model = Category

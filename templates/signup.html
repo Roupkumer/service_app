@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-7">
+            <div class="col-sm-7" style="background-color: lightcyan">
                 {% if form.errors %}
                     {% for field in form %}
                         {% for error in field.errors %}
@@ -23,7 +23,7 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-                <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <section>
                         {% for field in form %}
@@ -33,7 +33,9 @@
                             </div>
                         {% endfor %}
                     </section>
-                    <button class="btn btn-outline-success btn-lg" type="submit" style="margin-left: 10%;">SignUp
+                    <button class="btn btn-success btn-lg" type="submit" style="margin-left: 20%;">SignUp
+                    </button>
+                    <button class="btn btn-warning btn-lg"><a href="{% url 'home' %}">Cancel</a>
                     </button>
                 </form>
             </div>

@@ -4,12 +4,12 @@
     All Server
 {% endblock %}
 {% block content %}<br><br><br>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-8" style="background-color: lightcyan">
                 {% if user.is_authenticated %}
-                    <table class="table table-borderless" border="0" style="text-align:center;">
+                    <table class="table table-bordered" border="0" style="text-align:center;">
                         <thead>
                         <tr>
                             <th>Photo</th>

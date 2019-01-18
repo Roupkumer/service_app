@@ -1,3 +1,8 @@
-.table-borderless td,.table-borderless th {
- border:none;
+/*.table-borderless td,.table-borderless th {*/
+ /*border:none;*/
+/*}*/
+
+body{
+ background: url("/static/service_app/img/bg.png");
+ background: #cccccc;
 }

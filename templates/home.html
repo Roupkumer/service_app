@@ -1,21 +1,65 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}
     Home
 {% endblock %}
 {% block content %}<br><br><br>
     {% if user.is_authenticated %}
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-8">
-                <h1><u>All Categories</u></h1><br>
-                <ol>
-                    {% for c in category %}
-                        <h3><li><a href="{% url 'accounts:c_detail' c.id %}">{{ c.category_name }}</a></li></h3>
-                    {% endfor %}
-                </ol>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 11 %}"><img src="{% static 'service_app/img/Icon/advocate.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Advocate</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 12 %}"><img src="{% static 'service_app/img/Icon/architecture.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Architecture</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 6 %}"><img src="{% static 'service_app/img/Icon/rent  car.png' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Rent Car</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 5 %}"><img src="{% static 'service_app/img/Icon/shifting.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Shifting</h4>
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 4 %}"><img src="{% static 'service_app/img/Icon/carpenter.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Carpenter</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 3 %}"><img src="{% static 'service_app/img/Icon/mason.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Mason</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 1 %}"><img src="{% static 'service_app/img/Icon/electrician.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Electrician</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 8 %}"><img src="{% static 'service_app/img/Icon/decorator.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Decorator</h4>
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 9 %}"><img src="{% static 'service_app/img/Icon/home tutor.png' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Home Tutor</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 7 %}"><img src="{% static 'service_app/img/Icon/cook.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Cook</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 2 %}"><img src="{% static 'service_app/img/Icon/plumber 2.jpg' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Plumber</h4>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'accounts:c_detail' 13 %}"><img src="{% static 'service_app/img/Icon/others.png' %}" width="100" height="100"></a>
+                <h4 style="color:white;">Others</h4>
             </div>
         </div>
-    </div>
+    </div><hr>
     {% endif %}
 {% endblock %}

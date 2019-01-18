@@ -4,11 +4,15 @@
 {% endblock %}
 {% block content %}<br><br><br>
     {% if user.is_authenticated %}
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-8">
-                <h2><u>{{ c.category_name }}</u></h2><br>
+            <div class="col-md-4">
+                <img src="{{ c.img.url }}" width="300" height="300">
+                <h1 style="color:white;"><u>{{ c.category_name }}</u></h1><br>
+            </div>
+            <div class="col-md-8" style="background-color: lightcyan">
+
+
                 <ol>
                 {% for s in c.server_set.all %}
                    <h3><li><a href="{% url 'accounts:server_profile' s.id %}">{{ s.name }}</a></li></h3>
